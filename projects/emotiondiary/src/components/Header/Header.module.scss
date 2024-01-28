@@ -1,0 +1,27 @@
+@use "../../styles/color";
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 22px 108px;
+
+  ul.headerMenuList {
+    display: flex;
+
+    li {
+      padding: 4px 10px;
+    }
+
+    li.userInfo {
+      span {
+        font-weight: 700;
+      }
+    }
+
+    li.headerMenuItem {
+      color: color.$font-dark-gray;
+      font-size: 14px;
+      font-weight: 700;
+    }
+  }
+}
