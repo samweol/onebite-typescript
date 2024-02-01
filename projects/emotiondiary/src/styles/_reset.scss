@@ -1,7 +1,9 @@
+@use "./color";
 * {
   margin: 0;
   font-family: "Pretendard";
   box-sizing: border-box;
+  color: color.$font-default;
 }
 
 html {

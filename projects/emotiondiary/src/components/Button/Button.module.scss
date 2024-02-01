@@ -1,0 +1,11 @@
+@use "../../styles/color";
+
+button.button {
+  min-width: 392px;
+  padding: 14px 0;
+  border-radius: 4px;
+  background-color: color.$btn-default;
+
+  color: color.$font-white;
+  font-weight: 700;
+}
