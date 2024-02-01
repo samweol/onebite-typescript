@@ -1,5 +1,6 @@
 import styles from "./Header.module.scss";
 import { ReactComponent as MainLogo } from "../../assets/logo.svg";
+import { useNavigate } from "react-router-dom";
 
 export default function Header() {
   const userName = "홍길동";
@@ -13,10 +14,10 @@ export default function Header() {
           환영합니다 <span>{userName}님!</span>
         </li>
         <li className={styles.headerMenuItem}>
-          <a>로그인</a>
+          <a href="/signin">로그인</a>
         </li>
         <li className={styles.headerMenuItem}>
-          <a>회원가입</a>
+          <a href="/signup">회원가입</a>
         </li>
         <li className={styles.headerMenuItem}>
           <a>로그아웃</a>

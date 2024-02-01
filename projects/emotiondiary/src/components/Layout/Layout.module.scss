@@ -1,0 +1,12 @@
+@use "../../styles/color";
+main.layout {
+  width: 100%;
+  height: 100vh;
+  background-color: color.$bg-default;
+}
+
+main.layout.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

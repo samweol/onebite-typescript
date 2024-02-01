@@ -1,8 +1,8 @@
-import { ReactElement } from "react";
+import { ReactElement, ReactNode } from "react";
 import styles from "./Button.module.scss";
 
 interface Props {
-  children: ReactElement;
+  children: ReactNode;
   disabled?: boolean;
   onClickHandler?: () => void;
 }
