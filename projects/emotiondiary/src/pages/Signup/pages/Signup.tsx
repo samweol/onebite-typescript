@@ -8,27 +8,48 @@ import styles from "./Signup.module.scss";
 import { useRef } from "react";
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "../../../firebase";
-import { v4 as uuidv4 } from "uuid";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 export default function Signup() {
   const emailRef = useRef<HTMLInputElement>(null);
   const nicknameRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
 
+  const navigate = useNavigate();
+
   const signupHandler = async () => {
-    try {
-      console.log("signupHandler 진입");
-      await addDoc(collection(db, "user"), {
-        uid: uuidv4(),
-        email: emailRef.current!.value,
-        nickname: nicknameRef.current!.value,
-        password: passwordRef.current!.value,
+    const auth = getAuth();
+
+    const email = emailRef.current!.value;
+    const password = passwordRef.current!.value;
+    const nickname = nicknameRef.current!.value;
+
+    createUserWithEmailAndPassword(
+      auth,
+      emailRef.current!.value,
+      passwordRef.current!.value
+    )
+      .then(async (userCredential) => {
+        const user = userCredential.user;
+        await addDoc(collection(db, "user"), {
+          uid: user.uid,
+          email,
+          nickname,
+          password,
+        });
+
+        console.log("회원가입 성공🌟");
+        navigate("/signin");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+
+        console.log(
+          `파이어베이스 오류, errCode : ${errorCode}, errorMessage : ${errorMessage}`
+        );
       });
-      console.log("회원가입 성공");
-    } catch (err) {
-      console.log("회원가입 실패");
-      console.error(err);
-    }
   };
 
   return (
